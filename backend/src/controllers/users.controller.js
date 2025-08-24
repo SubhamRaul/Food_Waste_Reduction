@@ -66,9 +66,9 @@ const loginuser = async (req,res) => {
         }
     
         const accessToken = user.generateAcessToken();
-    
-        const loggedInUser = await User.findById(user._id).select("-password");
-    
+
+        const loggedInUser = await User.findById(user._id).select("-password -address -name -createdAt -updatedAt");
+
         const options = {
             httpOnly : true,
             secure: true,
@@ -79,7 +79,6 @@ const loginuser = async (req,res) => {
         .cookie("accesstoken" , accessToken , options)
         .json({
             loggedInUser,
-            accessToken,
             message:"User logged in successfully!"
         })
     } catch (error) {

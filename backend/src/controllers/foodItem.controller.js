@@ -1,9 +1,14 @@
 import {FoodItem} from "../models/foodItem.model.js";
+import {User} from "../models/donors.model.js";
 
 const createFoodItem = async (req, res) => {
     try {
-        const {Foodname,quantity,expiryDate,donorId} = req.body;
-        const newFoodItem = new FoodItem({Foodname,quantity,expiryDate,donorId});
+        const {Foodname,quantity,expiryDate,donor,ngo} = req.body;
+        const user = await User.findById(donor);
+        if(!user || user.type !== "donor"){
+            return res.status(403).json({ message: "Action is Forbidden" });
+        }
+        const newFoodItem = new FoodItem({Foodname,quantity,expiryDate,donor,ngo});
         await newFoodItem.save();
         res.status(201).json({newFoodItem , message: "Food item created successfully"});
     } catch (error) {
