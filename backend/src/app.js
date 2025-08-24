@@ -18,6 +18,7 @@ app.use(cookieParser());
 import userRouter from "./routes/user.route.js";
 app.use("/app/users" , userRouter);
 
-
+import foodItemRouter from "./routes/foodItem.route.js";
+app.use("/app/food-items" , foodItemRouter);
 
 export {app}

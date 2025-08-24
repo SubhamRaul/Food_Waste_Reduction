@@ -5,7 +5,7 @@ import {
     loginuser,
     logoutUser,
     updateProfile
-} from "../controllers/donors.controller.js"
+} from "../controllers/users.controller.js"
 const router = Router();
 
 router.post("/registerUser", registerUser);

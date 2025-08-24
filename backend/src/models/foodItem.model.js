@@ -31,7 +31,8 @@ const FoodSchema = new Schema({
     status:{
         type:String,
         enum:FoodEnum,
-        requireed:true,
+        required:true,
+        default:"available"
     }
 } , {timestamps:true})
 
