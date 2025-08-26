@@ -38,10 +38,10 @@ const registerUser = async (req , res) => {
 
         const newUser = new User({
             name,email,password : hashPassword,address,pincode,type
-        })
+        });
         await newUser.save();
-
-        res.status(201).json({newUser , message:"User Created successfully."})
+        const createdUser = await User.findOne({email}).select("-password -address -createdAt -updatedAt");
+        res.status(201).json({createdUser, message:"User Created successfully."})
 
     } catch (error) {
         console.log(error);

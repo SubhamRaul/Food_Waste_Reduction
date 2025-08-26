@@ -28,7 +28,7 @@ const fetchAllFoodItems = async (req, res) => {
             return res.status(400).json({ message: "You can only fetch food items in your area" });
         }
         const users = await User.find({ pincode  });
-        console.log(users);
+        // console.log(users);
         
         const foodItems = await FoodItem.find({ donor: { $in: users.map(user => user._id) } });
         res.status(200).json({ foodItems, message: "Food items retrieved successfully" });
